@@ -235,8 +235,25 @@ var pieceGraphic = [
 var piece;
 
 var objPiece = function(){
-    this.x = 0;
-    this.y = 0;
+    this.x = 5;
+    this.y = 7;
+
+    this.angle = 3;
+    this.type = 1;
+
+    this.draw = function(){
+        for(py=0; py<4; py++){
+            for(px=0; px<4; px++){
+                if(pieceGraphic[this.type][this.angle][py][px]!= 0){
+                    ctx.fillStyle = "#7777777";
+                    ctx.fillRect( (this.x + px)*widthPiece, (this.y + py)*heightPiece, widthPiece, heightPiece);
+
+                }
+          
+            }
+
+        }
+    };
 
     this.rotate = function(){
         console.log('Rotate');
@@ -289,7 +306,7 @@ setInterval(function(){
     mainFunction();
    }, 1000/FPS);
 
-}
+};
 
 
 
@@ -301,6 +318,7 @@ canvas.height = heightCanvas;
 
 function mainFunction(){
     cleanCanvas();
+    piece.draw();
 // console.log('bucle');
 
 };
