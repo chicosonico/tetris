@@ -68,13 +68,13 @@ var gameTableCopy = [
 ];
 
 //colors
-var red = '#b81e16';
-var purple = '#4c236e';
-var brown = '#5c392e';
-var blue = '#247eb3';
-var green = '#4eb543';
-var orange = '#fc5a03';
-var yellow = '#fcdb03';
+var brown = '#74353B';
+var pink = '#D39C9E';
+var grey = '#545E52';
+var blue = '#2F323D';
+var green = '#9CBE21';
+var orange = '#E35E27';
+var yellow = '#DEB366';
 
 //all piece and positions(angles)
 var pieceGraphic = [
@@ -398,19 +398,19 @@ var objPiece = function () {
             for (px = 0; px < 4; px++) {
                 if (pieceGraphic[this.type][this.angle][py][px] != 0) {
                     if (pieceGraphic[this.type][this.angle][py][px] == 1)
-                        ctx.fillStyle = "red";
+                        ctx.fillStyle = brown;
                     if (pieceGraphic[this.type][this.angle][py][px] == 2)
-                        ctx.fillStyle = "brown";
+                        ctx.fillStyle = grey;
                     if (pieceGraphic[this.type][this.angle][py][px] == 3)
-                        ctx.fillStyle = "purple";
+                        ctx.fillStyle = pink;
                     if (pieceGraphic[this.type][this.angle][py][px] == 4)
-                        ctx.fillStyle = "orange";
+                        ctx.fillStyle = orange;
                     if (pieceGraphic[this.type][this.angle][py][px] == 5)
-                        ctx.fillStyle = "blue";
+                        ctx.fillStyle = blue;
                     if (pieceGraphic[this.type][this.angle][py][px] == 6)
-                        ctx.fillStyle = "yellow";
+                        ctx.fillStyle = yellow;
                     if (pieceGraphic[this.type][this.angle][py][px] == 7)
-                        ctx.fillStyle = "green";
+                        ctx.fillStyle = green;
 
 
                     ctx.fillRect((this.x + px - 1) * widthPiece, 
@@ -470,19 +470,19 @@ function drawGameTable() {
         for (px = 1; px < widthGameTable+1; px++) {
             if (gameTable[py][px] != 0) {
                 if (gameTable[py][px] == 1)
-                    ctx.fillStyle = "red";
+                    ctx.fillStyle = brown;
                 if (gameTable[py][px] == 2)
-                    ctx.fillStyle = "brown";
+                    ctx.fillStyle = grey;
                 if (gameTable[py][px] == 3)
-                    ctx.fillStyle = "purple";
+                    ctx.fillStyle = pink;
                 if (gameTable[py][px] == 4)
-                    ctx.fillStyle = "orange";
+                    ctx.fillStyle = orange;
                 if (gameTable[py][px] == 5)
-                    ctx.fillStyle = "blue";
+                    ctx.fillStyle = blue;
                 if (gameTable[py][px] == 6)
-                    ctx.fillStyle = "yellow";
+                    ctx.fillStyle = yellow;
                 if (gameTable[py][px] == 7)
-                    ctx.fillStyle = "green";
+                    ctx.fillStyle = green;
 
 
 
@@ -518,7 +518,7 @@ function initKeyboard() {
 }
 
 
-function myFunction() {
+function mainF() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
