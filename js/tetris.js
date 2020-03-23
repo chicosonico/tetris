@@ -31,7 +31,31 @@ var gameTable = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+];
+
+var gameTableCopy = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -245,6 +269,17 @@ var pieceGraphic = [
 
 ];
 
+resetGameTable = function(){
+    console.log('reset');
+
+    for (py = 0; py < 21; py++) {
+        for (px = 0; px < 12; px++){
+            gameTable[py][px]=gameTableCopy[py][px];
+
+        }
+    }
+}
+
 
 
 
@@ -268,6 +303,44 @@ var objPiece = function () {
 
     };
 
+    this.checkLose = function(){
+        var lose = false;
+
+        for(px=1; px<widthGameTable+1; px++){
+          if(gameTable[2][px] > 0){
+              lose = true;
+            }
+          }
+        return lose;
+    };
+
+
+    this.lineCleaner = function(){
+
+		var fullLine;
+
+		for(py=marginTop;py<heightGameTable;py++){
+
+			fullLine = true;	
+			for(px=1;px<=widthGameTable+1;px++){
+				if(gameTable[py][px]==0){
+					fullLine = false;
+				}
+			}
+
+			
+			if(fullLine == true){
+				console.log("clean");
+				for(px=1;px<=widthGameTable+1;px++){
+					gameTable[py][px] = 0;
+				}
+			}
+		}
+
+	};
+
+
+
     this.falling = function () {
         if (this.frame < this.delay) {
             this.frame++;
@@ -279,7 +352,11 @@ var objPiece = function () {
             }
             else{
                this.pinUp();
+               this.lineCleaner();
                this.newPiece();
+               if(this.checkLose()== true){
+                 resetGameTable();  
+               }
             }
 
             this.frame = 0;
@@ -390,7 +467,7 @@ var objPiece = function () {
 
 function drawGameTable() {
     for (py = marginTop; py < heightGameTable; py++) {
-        for (px = 1; px < widthGameTable; px++) {
+        for (px = 1; px < widthGameTable+1; px++) {
             if (gameTable[py][px] != 0) {
                 if (gameTable[py][px] == 1)
                     ctx.fillStyle = "red";
